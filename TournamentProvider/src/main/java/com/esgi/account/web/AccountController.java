@@ -1,5 +1,8 @@
 package com.esgi.account.web;
 
+import com.esgi.account.authentication.AuthenticatedRequestBody;
+import com.esgi.account.authentication.ConnectionRequestBody;
+import com.esgi.account.authentication.AuthenticationManager;
 import com.esgi.account.exceptions.AccountLoginTooShortException;
 import com.esgi.account.model.Account;
 import com.esgi.account.service.AccountService;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -25,10 +29,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class AccountController {
 
     private final AccountService accountService;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
+        this.authenticationManager = new AuthenticationManager( this.accountService );
     }
 
     @RequestMapping(method = GET)
@@ -44,5 +50,22 @@ public class AccountController {
             throw new AccountLoginTooShortException("Account's login is too short");
         accountService.updateAccount( account );
         return account;
+    }
+
+    @RequestMapping(value = "/authenticate", method = POST)
+    public String authenticateAccount(@RequestBody ConnectionRequestBody connectionRequestBody){
+        String token = authenticationManager.getTokenByAuthentication(connectionRequestBody);
+
+        return token;
+    }
+
+
+    //Exemple utilisation AuthenticatedRequestBody
+    @RequestMapping(value = "/password", method = POST)
+    public String changePassword( @Valid @RequestBody AuthenticatedRequestBody<ConnectionRequestBody> connectionRequestBody){
+        String password = connectionRequestBody.getBody().getPassword();
+        String token = connectionRequestBody.getToken();
+
+        return password;
     }
 }
