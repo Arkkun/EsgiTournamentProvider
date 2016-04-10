@@ -29,12 +29,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class AccountController {
 
     private final AccountService accountService;
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
-        this.authenticationManager = new AuthenticationManager( this.accountService );
+        //this.authenticationManager = new AuthenticationManager( this.accountService );
     }
 
     @RequestMapping(method = GET)

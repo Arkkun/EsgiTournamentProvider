@@ -17,10 +17,12 @@ import org.springframework.stereotype.Component;
  */
 
 
-//ToDo : Exceptions de validation/creation etc
+//ToDo : Exceptions de validation/creation et
+@Component
 public class TokenProvider {
 
-    private final AccountService accountService;
+    @Autowired
+    AccountService accountService;
     ShaPasswordEncoder encoder;
 
     static String TOKEN_SEPARATOR = "!!!";
@@ -28,6 +30,10 @@ public class TokenProvider {
     private static final int ShaStrength = 256;//Todo variable globale ?
     private static final String secretKey = "SpringSecretKeyESGI";
 
+    public TokenProvider( )
+    {
+        encoder = new ShaPasswordEncoder( ShaStrength );
+    }
     public TokenProvider( AccountService accountService )
     {
         encoder = new ShaPasswordEncoder( ShaStrength );
