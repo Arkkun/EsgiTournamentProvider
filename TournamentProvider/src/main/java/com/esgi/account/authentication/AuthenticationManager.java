@@ -12,16 +12,17 @@ import org.springframework.stereotype.Component;
 public class AuthenticationManager {
     @Autowired
     AccountService accountService;
-    private final TokenProvider tokenProvider;
+    @Autowired
+    TokenProvider tokenProvider;
 
-    public AuthenticationManager(AccountService accountService ){
+    /*public AuthenticationManager(AccountService accountService ){
         this.accountService = accountService;
         this.tokenProvider = new TokenProvider( this.accountService );
-    }
+    }*/
 
-    public AuthenticationManager( ){
+    /*public AuthenticationManager( ){
         this.tokenProvider = new TokenProvider( this.accountService );
-    }
+    }*/
 
     public String getTokenByAuthentication( ConnectionRequestBody connectionRequestBody)
     {
@@ -30,11 +31,21 @@ public class AuthenticationManager {
             return null;
         }
 
+        return getTokenByAccount( account );
+    }
+
+    public String getTokenByAccount( Account account)
+    {
         return tokenProvider.getToken( account );
     }
 
     public Account getAccountByAuthentication( ConnectionRequestBody connectionRequestBody)
     {
         return accountService.getAccountByLoginAndPassword( connectionRequestBody.getLogin(), connectionRequestBody.getPassword() );
+    }
+
+    public Account getAccountFromToken( String token )
+    {
+        return tokenProvider.getAccountFromToken( token );
     }
 }

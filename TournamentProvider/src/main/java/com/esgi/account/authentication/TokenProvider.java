@@ -112,7 +112,7 @@ public class TokenProvider {
         return encoder.encodePassword(key, secretKey);
     }
 
-    public Account getUserFromToken(String token) {
+    public Account getAccountFromToken(String token) {
         if (!isTokenValid(token))
         { return null; }
 

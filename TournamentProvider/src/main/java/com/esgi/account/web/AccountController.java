@@ -63,10 +63,16 @@ public class AccountController {
 
     //Exemple utilisation AuthenticatedRequestBody
     @RequestMapping(value = "/password", method = POST)
-    public String changePassword( @Valid @RequestBody AuthenticatedRequestBody<ConnectionRequestBody> connectionRequestBody){
-        String password = connectionRequestBody.getBody().getPassword();
-        String token = connectionRequestBody.getToken();
+    public String changePassword( @Valid @RequestBody AuthenticatedRequestBody<String> password){
+        Account account = authenticationManager.getAccountFromToken( password.getToken() );
 
-        return password;
+        if( account == null )
+        {
+            return null;
+        }
+        account.setPassword( password.getBody() );
+        accountService.updateAccount( account );
+
+        return authenticationManager.getTokenByAccount( account );
     }
 }

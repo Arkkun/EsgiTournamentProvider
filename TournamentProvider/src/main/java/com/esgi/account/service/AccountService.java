@@ -4,6 +4,7 @@ import com.esgi.account.model.Account;
 import com.esgi.account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 
 //kvlnote utiliser @transactional ?
 @Service
+@Component
 public class AccountService {
     private final AccountRepository accountRepository;
 
