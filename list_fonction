@@ -1,0 +1,15 @@
+Account / Log off
+Account / Add game
+
+Team / acceptMember
+Team / refuseMember
+Team / getMember
+Team / dismissMember
+Team / getTeams
+Team / invitationMember
+Team / nominateOwner
+
+Tournament / joinTournament
+Tournament / makeStructTournament
+
+Match / sendProof

@@ -1,5 +1,6 @@
 package com.esgi.team.model;
 
+import com.esgi.account.model.Account;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,16 +22,12 @@ public class Team {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id_team;
-
-    @Column(name = "id_account_owner")
-    @ManyToOne
-    //@JoinColum(name = "id_account")
-    private int id_account_owner;
+    private int id;
 
     @Column(name = "name")
-    private int name;
+    private String name;
 
     @Column(name = "tag")
     private String tag;
+
 }
