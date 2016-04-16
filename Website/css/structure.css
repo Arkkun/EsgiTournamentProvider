@@ -1,0 +1,64 @@
+body,html
+{
+	height:100%;
+	width:100%;
+
+	font-family:"Comic Sans MS", cursive, sans-serif; 
+}
+body,html,div,p,ul,li,input
+{
+	margin: 0;
+	padding: 0;
+
+	font-size: 0;
+	line-height: 0;
+}
+
+#header
+{
+	display:block;
+	height:120px;
+
+	background-color: #48D;
+}
+
+#menu
+{
+	vertical-align: top;
+	display:inline-block;
+	width:250px;
+	height:calc(100% - 120px);
+
+	background-color: #6AF;
+
+	-moz-box-shadow: inset -1px 0px 0px 0px #656565;
+	-webkit-box-shadow: inset -1px 0px 0px 0px #656565;
+	-o-box-shadow: inset -1px 0px 0px 0px #656565;
+	box-shadow: inset -1px 0px 0px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=0);
+}
+
+#content
+{
+	vertical-align: top;
+	display:inline-block;
+	width:calc(100% - 250px);
+	height:calc(100% - 120px);
+
+	background-color: #EEE;
+}
+
+.text
+{
+	font-size: 20px;
+	line-height: 20px;
+	color:black;
+}
+
+.verticalAligner
+{
+	display: inline-block;
+	width:0;
+	height:100%;
+	vertical-align: middle;
+}

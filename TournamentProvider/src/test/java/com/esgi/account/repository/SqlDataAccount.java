@@ -18,9 +18,9 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @Retention(RetentionPolicy.RUNTIME)
 @Sql(
         statements = {
-                "insert into ACCOUNT (login, password, isAdmin) values ('login1', 'pass1', true)"
-                ,"insert into ACCOUNT (login, password, isAdmin) values ('login2', 'pass2', true)"
-                ,"insert into ACCOUNT (login, password, isAdmin) values ('login3', 'pass3', true)"
+                "insert into ACCOUNT (login, password, isAdmin) values ('login1', '63f2ede6bd8eeda82e7f9443a9ca582c0254e912b7b1c32f0d51d5b314f3f663', true)"
+                ,"insert into ACCOUNT (login, password, isAdmin) values ('login2', 'f305d3db71d65dbe09cbeaf24a7de7026ad8264b928b542c618a09015774a462', true)"
+                ,"insert into ACCOUNT (login, password, isAdmin) values ('login3', '1a83aa26a86799ef9ecdca2e7b88e91aab9cc34174d1995ce3c79740fc29e860', true)"
         },
         executionPhase = BEFORE_TEST_METHOD
 )

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Tournament Provider</title>
+
+		<link rel="stylesheet" href="css/structure.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/menu.css">
+		<link rel="stylesheet" href="css/content.css">
+		<link rel="stylesheet" href="css/lightBoxs.css">
+	</head>
+	<body>
+		<!-- ===== HEADER ===== -->
+		<div id="header">
+			<div id="header-top">
+				<div id="header-notConnected">
+					<input type="text" placeholder="login" class="text" id="header-login"/>
+					<input type="password" placeholder="password" class="text" id="header-password"/>
+					<input type="button" value="connexion" class="text" onclick="_GLOBAL.session.authenticateButton();"/>
+					<input type="button" value="s'enregistrer" class="text"  onclick="_GLOBAL.session.registerButton();"/>
+				</div>
+				<div id="header-connected">
+					<input type="button" value="deconnexion" class="text"  onclick="_GLOBAL.session.disconnect();"/>
+				</div>
+			</div>
+			<div id="pageTitle">
+				<p class="text"></p>
+			</div>
+		</div>
+		<!-- ===== MENU ===== -->
+		<div id="menu">
+			<ul>
+				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageAccount')">Gestion Compte</li>
+				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageTeam')">Gestion Team</li>
+			</ul>
+		</div>
+		<!-- ===== CONTENT ===== -->
+		<div id="content">
+			<!-- ===== MANAGE ACCOUNT ===== -->
+			<div id="ManageAccount" class="content">
+				<div class="form changePassword">
+					<p class="text">Nouveau password : </p>
+					<input type="password" placeholder="password" class="text" id="changePassword-password"/>
+					<input type="button" value="valider" class="text" onclick="_GLOBAL.navigation.controller['ManageAccount'].changePasswordButton();"/>
+				</div>
+				<div class="form getAccounts">
+					<input type="button" value="Lister comptes" class="text" onclick="_GLOBAL.navigation.controller['ManageAccount'].getAccounts();"/>
+				</div>
+			</div>
+			<!-- ===== MANAGE TEAM ===== -->
+			<div id="ManageTeam" class="content">
+				<p class="text">ManageTeam</p>
+			</div>
+			<!-- ===== INFO ACCOUNT ===== -->
+			<div id="InfoAccount" class="content">
+				<p class="text">id : <p class="text id temp-clean"></p></p>
+				<p class="text">login : <p class="text name temp-clean"></p></p>
+				<p class="text">isAdmin : <p class="text admin temp-clean"></p></p>
+			</div>
+			<!-- ===== LIST ACCOUNT ===== -->
+			<div id="ListAccount" class="content">
+				<div class="list">
+					<div class="row title">
+						<div class="text cell"> id </div>
+						<div class="text cell"> login </div>
+						<div class="text cell"> isAdmin </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="lightBox-cont-success" class="lightBox-cont">
+			<div class="verticalAligner"></div>
+			<div class="lightBox">
+				<div class="verticalAligner"></div>
+				<p class="text">opération réussie</p>
+			</div>
+		</div>
+		<div id="lightBox-cont-error" class="lightBox-cont">
+			<div class="verticalAligner"></div>
+			<div class="lightBox">
+				<div class="verticalAligner"></div>
+				<p class="text">opération échouée</p>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/global.js"></script>
+		<script src="js/navigation.js"></script>
+		<script src="js/session.js"></script>
+		<script src="js/apiCaller.js"></script>
+		<script src="js/lightBoxs.js"></script>
+		<script src="js/manageAccount.js"></script>
+		<script src="js/manageTeam.js"></script>
+		<script src="js/infoAccount.js"></script>
+		<script src="js/listAccount.js"></script>
+		<script src="js/init.js"></script>
+
+	</body>
+</html>
