@@ -24,8 +24,4 @@ public class TeamService {
         teamRepository.save(team);
         return true;
     }
-
-    public boolean addTeam(Team team){
-        return false;
-    }
 }

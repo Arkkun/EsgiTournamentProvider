@@ -21,7 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
     private final AccountService accountService;
@@ -36,7 +36,7 @@ public class AccountController {
         return accountService.getAccounts();
     }
 
-    @RequestMapping(method = POST)
+    @RequestMapping(method = POST, value = "/register")
     @ResponseStatus(CREATED)
     public Account registerAccount(@RequestBody Account account ){
 
