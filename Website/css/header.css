@@ -1,0 +1,78 @@
+#header #header-top
+{
+	display:block;
+	height:50%;
+	padding:0 15px;
+
+	-moz-box-shadow: inset 0px -1px 0px 0px #656565;
+	-webkit-box-shadow: inset 0px -1px 0px 0px #656565;
+	-o-box-shadow: inset 0px -1px 0px 0px #656565;
+	box-shadow: inset 0px -1px 0px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=90, Strength=0);
+}
+
+#header #header-connected
+{
+	display:block;
+	height:100%;
+
+	text-align: right;
+	line-height: 60px
+}
+
+#header #header-connected input
+,#header #header-connected p
+{
+	vertical-align: middle;
+	color:#000;
+	margin:0 15px;
+}
+
+#header #header-notConnected
+{
+	display:none;
+	height:100%;
+
+	text-align: right;
+	line-height: 60px
+}
+
+#header #header-notConnected input
+,#header #header-notConnected p
+{
+	vertical-align: middle;
+	color:#000;
+	margin:0 15px;
+}
+
+.notConnected #header #header-connected
+{
+	display:none;
+	height:100%;
+}
+
+.notConnected #header #header-notConnected
+{
+	display:block;
+	height:100%;
+}
+
+#header #pageTitle
+{
+	display:block;
+	height:50%;
+
+	text-align: center;
+
+	-moz-box-shadow: inset 0px -1px 0px 0px #656565;
+	-webkit-box-shadow: inset 0px -1px 0px 0px #656565;
+	-o-box-shadow: inset 0px -1px 0px 0px #656565;
+	box-shadow: inset 0px -1px 0px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=90, Strength=0);
+}
+
+#header #pageTitle p
+{
+	line-height: 60px;
+	color:#EEE;
+}

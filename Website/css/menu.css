@@ -1,0 +1,11 @@
+#menu ul
+{
+	padding:15px;
+	list-style-type: none;
+}
+
+#menu li
+{
+	height:40px;
+	line-height: 40px;
+}

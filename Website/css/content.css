@@ -1,0 +1,37 @@
+.content
+{
+	display:none;
+
+	padding:15px;
+}
+
+.content.current
+{
+	display:block;
+}
+
+.notConnected .content.current
+{
+	display:none;
+}
+
+.list
+{
+	display:table;
+	width: 100%;
+}
+
+.row
+{
+	display:table-row;
+}
+
+.row.title
+{
+	font-weight: bold;
+}
+
+.cell
+{
+	display:table-cell;
+}

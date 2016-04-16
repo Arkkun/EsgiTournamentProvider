@@ -1,0 +1,64 @@
+token retenu en js
+header avec pseudo ou connexion/inscription si pas de token dispo
+categorie d'action en cour
+menu a gauche avec categories d'actions
+Contenu de la categorie sur le reste de la page
+
+categories d'actions : 
+
+info compte :
+affiche fiche utilisateur
+
+joueurs :
+-changer mot de passe : nouveau mot de passe + confirmation
+-Rechercher joueur : text clef
+--->tableau joueurs clic pour acceder a la fiche
+
+equipes :
+affiche équipes
+-creer equipe : text nom, text tag
+-supprimer equipe : droplist
+-Rechercher equipe : text clef
+--->tableau equipe clic pour acceder a la fiche
+---> fiche clic pour demande d'adhesion
+-afficher demandes adhesion
+--->tableau demandes clic pour accepter/refuser
+
+tournois :
+affiche mes tournois
+-Rechercher tournoi : text clef
+--->tableau tournoi clic pour acceder a la fiche
+---> fiche clic pour inscription
+
+match :
+affiche mes matchs
+--->tableau matchs clic pour acceder a la fiche
+---> si owner, donner resultat et upload preuve
+
+administration :
+-creation tournoi : droplist jeu, text nom
+-cloturer inscription : droplist tournois
+
+
+templates :
+
+Content :
+InfoAccount
+InfoTeam
+InfoTournament
+InfoMatch
+ManageAccount
+ManageTeam
+ManageTournament
+ManageMatch
+ManageAdmin
+ListAccount
+ListTeam
+ListTournament
+ListMatch
+
+others :
+PopupSuccess
+PopupError
+MenuCategories
+MenuHeader

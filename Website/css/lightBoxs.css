@@ -1,0 +1,51 @@
+.lightBox-cont
+{
+	display:none;
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	text-align: center;
+
+	background-color: rgba( 0, 0, 0, 0.6);
+}
+
+.lightBox
+{
+	display:inline-block;
+	height:100px;
+	width:300px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.lightBox p
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#lightBox-cont-success .lightBox
+{
+	border: 1px solid #2e8b57;
+	border-radius: 10px;
+	background-color: #98fb98;
+}
+
+#lightBox-cont-success p
+{
+	color: #2e8b57;
+}
+
+#lightBox-cont-error .lightBox
+{
+	border: 1px solid #ff4500;
+	border-radius: 10px;
+	background-color: #ffa07a;
+}
+
+#lightBox-cont-error p
+{
+	color: #ff4500;
+}
