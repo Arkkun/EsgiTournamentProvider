@@ -51,7 +51,6 @@ public class AccountService {
         }
         catch( IndexOutOfBoundsException e )
         {
-            System.out.println("account not found");
             return null;
         }
 

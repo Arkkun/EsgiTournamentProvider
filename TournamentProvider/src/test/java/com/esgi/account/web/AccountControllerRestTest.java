@@ -49,8 +49,8 @@ public class AccountControllerRestTest extends AbstractRestTest {
 
     @Test
     public void should_get_account_by_id(){
-        /*
-        String id = "2";
+
+        /*String id = "1";
         String login = "root";
         Boolean admin = true;
         int idR = 1;
@@ -64,8 +64,8 @@ public class AccountControllerRestTest extends AbstractRestTest {
                 .body("id", is(idR))
                 .body("login", is(login))
                 .body("admin", is(admin))
-        ;
-        */
+        ;*/
+
     }
 
     @Test

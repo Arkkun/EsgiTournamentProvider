@@ -20,7 +20,7 @@ public class Account {
 
     @Id
     @GeneratedValue
-    @Column(name = "idt")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "login")
