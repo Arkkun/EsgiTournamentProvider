@@ -1,5 +1,8 @@
 package com.esgi.account.authentication;
 
+import com.esgi.account.exceptions.AuthenticationNotValidException;
+import com.esgi.account.exceptions.MustBeAuthenticatedAsAdminException;
+import com.esgi.account.exceptions.MustBeAuthenticatedException;
 import com.esgi.account.model.Account;
 import com.esgi.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,7 @@ public class AuthenticationManager {
     {
         Account account = getAccountByAuthentication(connectionRequestBody);
         if ( account == null ) {
-            return null;
+            throw new AuthenticationNotValidException();
         }
 
         return getTokenByAccount( account );
@@ -47,5 +50,23 @@ public class AuthenticationManager {
     public Account getAccountFromToken( String token )
     {
         return tokenProvider.getAccountFromToken( token );
+    }
+
+    public void mustBeValidToken( String token )
+    {
+        Account account = getAccountFromToken( token  );
+        if( account == null  )
+        {
+            throw new MustBeAuthenticatedException();
+        }
+    }
+
+    public void mustBeValidAdminToken( String token )
+    {
+        Account account = getAccountFromToken( token  );
+        if( account == null && account.isAdmin()  )
+        {
+            throw new MustBeAuthenticatedAsAdminException();
+        }
     }
 }

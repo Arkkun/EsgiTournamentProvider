@@ -34,11 +34,11 @@ public class TokenProvider {
     {
         encoder = new ShaPasswordEncoder( ShaStrength );
     }
-    public TokenProvider( AccountService accountService )
+    /*public TokenProvider( AccountService accountService )
     {
         encoder = new ShaPasswordEncoder( ShaStrength );
         this.accountService = accountService;
-    }
+    }*/
 
     public String getToken(Account account) {
         return getToken(account, DateTime.now().plusDays(1).getMillis());
@@ -64,7 +64,6 @@ public class TokenProvider {
         String[] tokenComponents = decodeAndDissectToken( encodedToken );
 
         if (tokenComponents == null || tokenComponents.length != 3) {
-            System.out.println("not a token");
             return false;
         }
 
@@ -84,12 +83,10 @@ public class TokenProvider {
         byte[] externalKeyBytes = externalKey.getBytes();
 
         if (!MessageDigest.isEqual(expectedKeyBytes, externalKeyBytes)) {
-            System.out.println("token altered");
             return false;
         }
 
         if (new DateTime(externalDate).isBeforeNow()) {
-            System.out.println("token expired");
             return false;
         }
 

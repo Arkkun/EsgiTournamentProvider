@@ -3,16 +3,15 @@ package com.esgi.account.web;
 import com.esgi.account.authentication.AuthenticatedRequestBody;
 import com.esgi.account.authentication.ConnectionRequestBody;
 import com.esgi.account.authentication.AuthenticationManager;
-import com.esgi.account.exceptions.AccountLoginTooShortException;
+import com.esgi.account.authentication.Token;
+import com.esgi.account.exceptions.AccountFieldNotValidException;
+import com.esgi.account.exceptions.AccountNotFoundException;
 import com.esgi.account.model.Account;
+import com.esgi.account.model.AccountPublic;
 import com.esgi.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -39,40 +38,62 @@ public class AccountController {
     }
 
     @RequestMapping(method = GET)
-    public List<Account> getAccounts() {
-        return accountService.getAccounts();
+    public List<AccountPublic> getAccounts( ) {
+        List<AccountPublic> accountPublicList = accountService.accountListToAccountPublicList( accountService.getAccounts() );
+        return accountPublicList;
+    }
+
+    @RequestMapping(value="/{id}", method = GET)
+    public AccountPublic getAccountById(@PathVariable(value="id") int id )
+    {
+        Account account = accountService.getAccountById( id );
+        if( account == null )
+        {
+            throw new AccountNotFoundException();
+        }
+
+        AccountPublic accountP = new AccountPublic( account );
+
+        return accountP;
     }
 
     @RequestMapping(method = POST)
     @ResponseStatus(CREATED)
-    public Account registerAccount(@RequestBody Account account ){
+    public AccountPublic registerAccount(@RequestBody ConnectionRequestBody connectionRequestBody )
+    {
+        Account account;
+        String login = connectionRequestBody.getLogin();
+        String password = connectionRequestBody.getPassword();
+        accountService.validateLogin( login );
+        accountService.validatePassword( password );
 
-        if( account.getLogin().length() < 3 )
-            throw new AccountLoginTooShortException("Account's login is too short");
+        if( accountService.getAccountByLogin( login ) != null )
+        {
+            throw new AccountFieldNotValidException( "Account's login already in use" );
+        }
+
+        account = Account.builder().id( 0 ).login( login ).password( password ).isAdmin( false ).build();
         accountService.updateAccount( account );
-        return account;
+        return new AccountPublic( account );
     }
 
     @RequestMapping(value = "/authenticate", method = POST)
-    public String authenticateAccount(@RequestBody ConnectionRequestBody connectionRequestBody){
-        String token = authenticationManager.getTokenByAuthentication(connectionRequestBody);
-
-        return token;
+    public Token authenticateAccount(@RequestBody ConnectionRequestBody connectionRequestBody )
+    {
+        return new Token( authenticationManager.getTokenByAuthentication(connectionRequestBody) );
     }
 
 
     //Exemple utilisation AuthenticatedRequestBody
     @RequestMapping(value = "/password", method = POST)
-    public String changePassword( @Valid @RequestBody AuthenticatedRequestBody<String> password){
-        Account account = authenticationManager.getAccountFromToken( password.getToken() );
+    public Token changePassword( @RequestBody AuthenticatedRequestBody<String> password ){
+        authenticationManager.mustBeValidToken( password.getToken() );
+        accountService.validatePassword( password.getBody() );
 
-        if( account == null )
-        {
-            return null;
-        }
+        Account account = authenticationManager.getAccountFromToken( password.getToken() );
         account.setPassword( password.getBody() );
         accountService.updateAccount( account );
 
-        return authenticationManager.getTokenByAccount( account );
+        return new Token( authenticationManager.getTokenByAccount( account ) );
     }
 }
