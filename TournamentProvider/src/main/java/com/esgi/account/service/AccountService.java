@@ -18,7 +18,7 @@ import java.util.List;
 
 //kvlnote utiliser @transactional ?
 @Service
-@Component
+//@Component
 public class AccountService {
     private final AccountRepository accountRepository;
 

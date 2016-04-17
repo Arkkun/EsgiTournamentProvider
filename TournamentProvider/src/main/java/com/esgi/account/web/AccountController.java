@@ -57,7 +57,7 @@ public class AccountController {
         return accountP;
     }
 
-    @RequestMapping(method = POST, value = "/register")
+    @RequestMapping(method = POST)
     @ResponseStatus(CREATED)
     public AccountPublic registerAccount(@RequestBody ConnectionRequestBody connectionRequestBody )
     {

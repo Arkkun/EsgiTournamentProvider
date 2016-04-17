@@ -13,4 +13,5 @@ import java.util.List;
 public interface TeamRepository extends JpaRepository<Team, String> {
 
     List<Team> findAll();
+    List<Team> findById( int id );
 }

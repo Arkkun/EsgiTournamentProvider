@@ -1,6 +1,5 @@
 package com.esgi.team.model;
 
-import com.esgi.account.model.Account;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,5 +28,8 @@ public class Team {
 
     @Column(name = "tag")
     private String tag;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
 }

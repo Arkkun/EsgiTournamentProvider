@@ -1,15 +1,13 @@
-package com.esgi.team;
+package com.esgi.team.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Created by 212416808 on 4/14/2016.
  */
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamCreation {
