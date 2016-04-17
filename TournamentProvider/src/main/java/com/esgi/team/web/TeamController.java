@@ -120,7 +120,17 @@ public class TeamController {
 
     @RequestMapping(method = DELETE, value = "/{idTeam}")
     public boolean deleteTeam(@RequestBody Token authentication, @PathVariable("idTeam") int idTeam){
+        Team team = teamService.getTeamById(idTeam);
+        authenticationManager.mustBeValidOwnerTeamToken(authentication.getToken(), team.getId());
+        team.setDeleted(true);
+        teamService.updateTeam(team);
+        return true;
+    }
 
-        return false;
+    @RequestMapping(method = PUT, value = "/membership/list/{idTeam}")
+    public List<Membership> getListApply(@RequestBody Token authentication, @PathVariable("idTeam") int idTeam ){
+        Team team = teamService.getTeamById(idTeam);
+        authenticationManager.mustBeValidOwnerTeamToken(authentication.getToken(), team.getId());
+        return membershipService.getApplyMembershipsByTeam(team);
     }
 }

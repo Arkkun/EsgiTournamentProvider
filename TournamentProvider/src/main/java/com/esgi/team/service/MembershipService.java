@@ -5,6 +5,7 @@ import com.esgi.team.model.Membership;
 import com.esgi.team.model.Team;
 import com.esgi.team.repository.MembershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,10 @@ public class MembershipService {
 
     public List<Membership> getMembershipsByTeam(Team team){
         return membershipRepository.findByTeam(team);
+    }
+
+    public List<Membership> getApplyMembershipsByTeam(Team team){
+        return membershipRepository.findApplyMembershipsByTeam(team);
     }
 
     public List<Membership> getMembershipById(int idJoin){
