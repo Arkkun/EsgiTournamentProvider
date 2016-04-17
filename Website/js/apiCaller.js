@@ -216,9 +216,9 @@ var ApiCaller = function()
 		this.myAjax( url, method, data, callback );
 	}
 
-	proto.giveMatchResult = function( id, score, callback )
+	proto.giveMatchResult = function( idMatch, score, idTeam, callback )
 	{
-		var url = this.baseURL + "match/" + id;
+		var url = this.baseURL + "match/" + idMatch + "/result/" + idTeam;
 		var method = "PUT";
 		var data = {
 			"body": score

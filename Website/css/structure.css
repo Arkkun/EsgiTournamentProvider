@@ -62,3 +62,12 @@ body,html,div,p,ul,li,input
 	height:100%;
 	vertical-align: middle;
 }
+
+input[type="button"]
+{
+	border-radius: 5px;
+	border: 2px solid #049;
+	background-color : #97FFFF;
+	padding:5px;
+	margin:5px;
+}

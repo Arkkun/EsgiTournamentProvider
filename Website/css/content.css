@@ -15,6 +15,11 @@
 	display:none;
 }
 
+.form
+{
+	margin-bottom: 20px;
+}
+
 .list
 {
 	display:table;

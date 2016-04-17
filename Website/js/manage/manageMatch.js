@@ -40,19 +40,20 @@ var ManageMatch = function()
 
 	proto.giveMatchResultButton = function()
 	{
-		var id = $( '#giveMatchResult-id' ).val();
+		var idMatch = $( '#giveMatchResult-idMatch' ).val();
 		var score = $( '#giveMatchResult-score' ).val();
-		this.giveMatchResult( id, score);
+		var idTeam = $( '#giveMatchResult-idTeam' ).val();
+		this.giveMatchResult( idMatch, score, idTeam );
 	}
 
-	proto.giveMatchResult = function( id, score )
+	proto.giveMatchResult = function( idMatch, score, idTeam )
 	{
 		var callback = function( data )
 		{
 			_GLOBAL.lightBoxs.openLightBox( "success");
 		}
 
-		_GLOBAL.apiCaller.giveMatchResult( id, score, callback );
+		_GLOBAL.apiCaller.giveMatchResult( idMatch, score, idTeam, callback );
 	}
 
 	return _construct;

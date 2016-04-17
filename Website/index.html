@@ -67,11 +67,13 @@
 			<!-- ===== MANAGE MATCH ===== -->
 			<div id="ManageMatch" class="content">
 				<div class="form giveMatchResult">
-					<p class="text">Id : </p>
-					<input type="text" placeholder="id" class="text temp-val" id="giveMatchResult-id"/>
+					<p class="text">Id match : </p>
+					<input type="text" placeholder="id Match" class="text temp-val" id="giveMatchResult-idMatch"/>
 					<p class="text">Score : </p>
 					<input type="text" placeholder="score" class="text temp-val" id="giveMatchResult-score"/>
-					<input type="button" value="Publier" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].giveMatchResult();"/>
+					<p class="text">Id team : </p>
+					<input type="text" placeholder="id Team" class="text temp-val" id="giveMatchResult-idTeam"/>
+					<input type="button" value="Publier" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].giveMatchResultButton();"/>
 				</div>
 				<div class="form getMatchs">
 					<input type="button" value="Lister matchs" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].getMatchs();"/>
