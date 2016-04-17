@@ -19,6 +19,9 @@ public interface MembershipRepository extends JpaRepository<Membership, String> 
     @Query("select m from Membership m where m.team = :team and m.account = :account")
     Membership findMembershipByTeamAndAccount(@Param("account") Account account, @Param("team") Team team);
 
+    @Query("select m from Membership m where m.team = :team and m.status = 'applied'")
+    List<Membership> findApplyMembershipsByTeam(@Param("team") Team team);
+
     List<Membership> findAll();
     List<Membership> findByTeam(Team team);
     List<Membership> findById(int id);
