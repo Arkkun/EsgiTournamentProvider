@@ -5,8 +5,13 @@ var Navigation = function()
 		this.controller = {};
 		this.controller["ManageAccount"] = new ManageAccount();
 		this.controller["ManageTeam"] = new ManageTeam();
+		this.controller["ManageMatch"] = new ManageMatch();
 		this.controller["InfoAccount"] = new InfoAccount();
+		this.controller["InfoTeam"] = new InfoTeam();
+		this.controller["InfoMatch"] = new InfoMatch();
 		this.controller["ListAccount"] = new ListAccount();
+		this.controller["ListTeam"] = new ListTeam();
+		this.controller["ListMatch"] = new ListMatch();
 
 		this.allControllerElem = $( ".content" );
 		this.pageTitle = $( "#pageTitle p" );
@@ -39,7 +44,8 @@ var Navigation = function()
 				this.currentController.exit();
 
 			$( this.currentController.controllerElem ).find( ".temp" ).remove();
-			$( this.currentController.controllerElem ).find( ".temp-clean" ).html("");
+			$( this.currentController.controllerElem ).find( ".temp-html" ).html("");
+			$( this.currentController.controllerElem ).find( ".temp-val" ).val("");
 		}
 	}
 

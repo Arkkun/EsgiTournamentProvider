@@ -16,9 +16,10 @@ var InfoAccount = function()
 	proto.init = function( data )
 	{
 		var infoElem = $( "#InfoAccount" );
-		infoElem.find( ".name" ).html( data.login );
-		infoElem.find( ".id" ).html( data.id );
-		infoElem.find( ".admin" ).html( ""+data.admin );
+		var dataAccount = data.account;
+		infoElem.find( ".name" ).html( dataAccount.login );
+		infoElem.find( ".id" ).html( dataAccount.id );
+		infoElem.find( ".admin" ).html( ""+dataAccount.admin );
 	}
 
 	return _construct;

@@ -17,8 +17,8 @@
 				<div id="header-notConnected">
 					<input type="text" placeholder="login" class="text" id="header-login"/>
 					<input type="password" placeholder="password" class="text" id="header-password"/>
-					<input type="button" value="connexion" class="text" onclick="_GLOBAL.session.authenticateButton();"/>
-					<input type="button" value="s'enregistrer" class="text"  onclick="_GLOBAL.session.registerButton();"/>
+					<input type="button" value="connexion" class="text" onclick="_GLOBAL.navigation.controller['ManageAccount'].authenticateButton();"/>
+					<input type="button" value="s'enregistrer" class="text"  onclick="_GLOBAL.navigation.controller['ManageAccount'].registerButton();"/>
 				</div>
 				<div id="header-connected">
 					<input type="button" value="deconnexion" class="text"  onclick="_GLOBAL.session.disconnect();"/>
@@ -31,8 +31,10 @@
 		<!-- ===== MENU ===== -->
 		<div id="menu">
 			<ul>
+				<li class="text" onclick="_GLOBAL.navigation.controller['ManageAccount'].getMyAccount()">Mon Compte</li>
 				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageAccount')">Gestion Compte</li>
-				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageTeam')">Gestion Team</li>
+				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageTeam')">Gestion Teams</li>
+				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageMatch')">Gestion Matchs</li>
 			</ul>
 		</div>
 		<!-- ===== CONTENT ===== -->
@@ -41,7 +43,7 @@
 			<div id="ManageAccount" class="content">
 				<div class="form changePassword">
 					<p class="text">Nouveau password : </p>
-					<input type="password" placeholder="password" class="text" id="changePassword-password"/>
+					<input type="password" placeholder="password" class="text temp-val" id="changePassword-password"/>
 					<input type="button" value="valider" class="text" onclick="_GLOBAL.navigation.controller['ManageAccount'].changePasswordButton();"/>
 				</div>
 				<div class="form getAccounts">
@@ -50,13 +52,48 @@
 			</div>
 			<!-- ===== MANAGE TEAM ===== -->
 			<div id="ManageTeam" class="content">
-				<p class="text">ManageTeam</p>
+				<div class="form createTeam">
+					<p class="text">Nom : </p>
+					<input type="text" placeholder="nom" class="text temp-val" id="createTeam-name"/>
+					<p class="text">Tag : </p>
+					<input type="text" placeholder="tag" class="text temp-val" id="createTeam-tag"/>
+					<input type="button" value="Créer" class="text" onclick="_GLOBAL.navigation.controller['ManageTeam'].createTeamButton();"/>
+				</div>
+				<div class="form getTeams">
+					<input type="button" value="Lister teams" class="text" onclick="_GLOBAL.navigation.controller['ManageTeam'].getTeams();"/>
+				</div>
+			</div>
+			<!-- ===== MANAGE MATCH ===== -->
+			<div id="ManageMatch" class="content">
+				<div class="form giveMatchResult">
+					<p class="text">Id : </p>
+					<input type="text" placeholder="id" class="text temp-val" id="giveMatchResult-id"/>
+					<p class="text">Score : </p>
+					<input type="text" placeholder="score" class="text temp-val" id="giveMatchResult-score"/>
+					<input type="button" value="Publier" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].giveMatchResult();"/>
+				</div>
 			</div>
 			<!-- ===== INFO ACCOUNT ===== -->
 			<div id="InfoAccount" class="content">
-				<p class="text">id : <p class="text id temp-clean"></p></p>
-				<p class="text">login : <p class="text name temp-clean"></p></p>
-				<p class="text">isAdmin : <p class="text admin temp-clean"></p></p>
+				<p class="text">id : <span class="text id temp-html"></span></p>
+				<p class="text">login : <span class="text name temp-html"></span></p>
+				<p class="text">isAdmin : <span class="text admin temp-html"></span></p>
+			</div>
+			<!-- ===== INFO TEAM ===== -->
+			<div id="InfoTeam" class="content">
+				<p class="text">id : <span class="text id temp-html"></span></p>
+				<p class="text">name : <span class="text name temp-html"></span></p>
+				<p class="text">tag : <span class="text tag temp-html"></span></p>
+			</div>
+			<!-- ===== INFO MATCH ===== -->
+			<div id="InfoMatch" class="content">
+				<p class="text">id : <span class="text id temp-html"></span></p>
+				<p class="text">round : <span class="text round temp-html"></span></p>
+				<p class="text">place : <span class="text place temp-html"></span></p>
+				<p class="text">team1 : <span class="text team1 temp-html"></span></p>
+				<p class="text">score1 : <span class="text score1 temp-html"></span></p>
+				<p class="text">team2 : <span class="text team2 temp-html"></span></p>
+				<p class="text">score2 : <span class="text score2 temp-html"></span></p>
 			</div>
 			<!-- ===== LIST ACCOUNT ===== -->
 			<div id="ListAccount" class="content">
@@ -68,8 +105,32 @@
 					</div>
 				</div>
 			</div>
+			<!-- ===== LIST TEAM ===== -->
+			<div id="ListTeam" class="content">
+				<div class="list">
+					<div class="row title">
+						<div class="text cell"> id </div>
+						<div class="text cell"> name </div>
+						<div class="text cell"> tag </div>
+					</div>
+				</div>
+			</div>
+			<!-- ===== LIST MATCH ===== -->
+			<div id="ListMatch" class="content">
+				<div class="list">
+					<div class="row title">
+						<div class="text cell"> id </div>
+						<div class="text cell"> round </div>
+						<div class="text cell"> place </div>
+						<div class="text cell"> team1 </div>
+						<div class="text cell"> score1 </div>
+						<div class="text cell"> team2 </div>
+						<div class="text cell"> score2 </div>
+					</div>
+				</div>
+			</div>
 		</div>
-
+		<!-- ===== LIGHTBOXS ===== -->
 		<div id="lightBox-cont-success" class="lightBox-cont">
 			<div class="verticalAligner"></div>
 			<div class="lightBox">
@@ -84,7 +145,7 @@
 				<p class="text">opération échouée</p>
 			</div>
 		</div>
-
+		<!-- ===== IMPORT JS ===== -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/global.js"></script>
@@ -92,10 +153,15 @@
 		<script src="js/session.js"></script>
 		<script src="js/apiCaller.js"></script>
 		<script src="js/lightBoxs.js"></script>
-		<script src="js/manageAccount.js"></script>
-		<script src="js/manageTeam.js"></script>
-		<script src="js/infoAccount.js"></script>
-		<script src="js/listAccount.js"></script>
+		<script src="js/manage/manageAccount.js"></script>
+		<script src="js/manage/manageTeam.js"></script>
+		<script src="js/manage/manageMatch.js"></script>
+		<script src="js/info/infoAccount.js"></script>
+		<script src="js/info/infoTeam.js"></script>
+		<script src="js/info/infoMatch.js"></script>
+		<script src="js/list/listAccount.js"></script>
+		<script src="js/list/listTeam.js"></script>
+		<script src="js/list/listMatch.js"></script>
 		<script src="js/init.js"></script>
 
 	</body>
