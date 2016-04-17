@@ -16,7 +16,7 @@ var InfoAccount = function()
 	proto.init = function( data )
 	{
 		var infoElem = $( "#InfoAccount" );
-		var dataAccount = data.account;
+		var dataAccount = data.accountPublic;
 		infoElem.find( ".name" ).html( dataAccount.login );
 		infoElem.find( ".id" ).html( dataAccount.id );
 		infoElem.find( ".admin" ).html( ""+dataAccount.admin );

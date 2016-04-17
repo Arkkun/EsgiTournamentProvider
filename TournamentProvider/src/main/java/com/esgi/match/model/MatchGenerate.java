@@ -1,6 +1,6 @@
 package com.esgi.match.model;
 
-import com.esgi.match.Team;
+import com.esgi.team.model.Team;
 import com.esgi.tournament.model.Tournament;
 import lombok.*;
 
@@ -17,5 +17,4 @@ import java.util.List;
 public class MatchGenerate {
     private Tournament tournament;
     private List<Team> teamList;
-    private int round;
 }

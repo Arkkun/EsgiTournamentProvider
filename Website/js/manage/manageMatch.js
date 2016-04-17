@@ -18,6 +18,16 @@ var ManageMatch = function()
 		this.controllerElem.find( "#giveMatchResult-id" ).val( data );
 	}
 
+	proto.getMatchs = function()
+	{
+		var callback = function( data )
+		{
+			_GLOBAL.navigation.goTo( "ListMatch", data );
+		};
+
+		_GLOBAL.apiCaller.getMatchs( callback );
+	}
+
 	proto.getMatchById = function( id )
 	{
 		var callback = function( data )

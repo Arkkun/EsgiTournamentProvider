@@ -1,7 +1,9 @@
 package com.esgi.tournament.service;
 
+import com.esgi.account.exceptions.AccountFieldNotValidException;
 import com.esgi.account.model.Account;
 import com.esgi.account.repository.AccountRepository;
+import com.esgi.tournament.exceptions.TournamentFieldNotValidException;
 import com.esgi.tournament.model.Tournament;
 import com.esgi.tournament.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +60,44 @@ public class TournamentService {
         }
 
         return tournament;
+    }
+
+    public void validateName(String name ) {
+        if( name == null )
+            throw new TournamentFieldNotValidException("Tournament's name has to be set");
+        if( name.length() < 3 )
+            throw new TournamentFieldNotValidException("Tournament's name is too short");
+        if( name.length() > 50 )
+            throw new TournamentFieldNotValidException("Tournament's name is too long");
+    }
+
+    public void validateDescription(String description ) {
+        if( description == null )
+            throw new TournamentFieldNotValidException("Tournament's description has to be set");
+        if( description.length() < 3 )
+            throw new TournamentFieldNotValidException("Tournament's description is too short");
+        if( description.length() > 250 )
+            throw new TournamentFieldNotValidException("Tournament's description is too long");
+    }
+
+    public void validateDate(String date ) {
+        if( date == null )
+            throw new TournamentFieldNotValidException("Tournament's date has to be set");
+    }
+
+    public void validateTournamentSize(int size ) {
+        if((size & -size) == size)//check if power of 2
+        {
+            if( size > 1 ){
+                return;
+            }
+        }
+            throw new TournamentFieldNotValidException("Tournament's size has to be a power of 2");
+    }
+
+    public void validateTeamSize(int size ) {
+        if( size <= 0)
+            throw new TournamentFieldNotValidException("Tournament's team's size has to be greater than 0");
+
     }
 }

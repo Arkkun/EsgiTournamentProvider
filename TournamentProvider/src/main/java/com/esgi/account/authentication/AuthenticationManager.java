@@ -88,7 +88,7 @@ public class AuthenticationManager {
     public void mustBeValidAdminToken( String token )
     {
         Account account = getAccountFromToken( token  );
-        if( account == null && account.isAdmin()  )
+        if( account == null || account.isAdmin() == false  )
         {
             throw new MustBeAuthenticatedAsAdminException();
         }

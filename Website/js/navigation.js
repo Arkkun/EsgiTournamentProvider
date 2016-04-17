@@ -6,12 +6,15 @@ var Navigation = function()
 		this.controller["ManageAccount"] = new ManageAccount();
 		this.controller["ManageTeam"] = new ManageTeam();
 		this.controller["ManageMatch"] = new ManageMatch();
+		this.controller["ManageTournament"] = new ManageTournament();
 		this.controller["InfoAccount"] = new InfoAccount();
 		this.controller["InfoTeam"] = new InfoTeam();
 		this.controller["InfoMatch"] = new InfoMatch();
+		this.controller["InfoTournament"] = new InfoTournament();
 		this.controller["ListAccount"] = new ListAccount();
 		this.controller["ListTeam"] = new ListTeam();
 		this.controller["ListMatch"] = new ListMatch();
+		this.controller["ListTournament"] = new ListTournament();
 
 		this.allControllerElem = $( ".content" );
 		this.pageTitle = $( "#pageTitle p" );

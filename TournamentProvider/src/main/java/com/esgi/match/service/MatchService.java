@@ -1,7 +1,8 @@
 package com.esgi.match.service;
 
 import com.esgi.account.repository.AccountRepository;
-import com.esgi.match.Team;
+import com.esgi.match.model.MatchPublic;
+import com.esgi.team.model.Team;
 import com.esgi.match.model.Match;
 import com.esgi.match.model.MatchGenerate;
 import com.esgi.match.repository.MatchRepository;
@@ -27,6 +28,12 @@ public class MatchService {
     public MatchService( MatchRepository matchRepository ) {
         this.matchRepository = matchRepository;
     }
+
+    public List<Match> getMatchs() {
+        return matchRepository.findAll();
+    }
+
+
     public Match getMatchById(int id) {
         Match match;
         try
@@ -78,10 +85,20 @@ public class MatchService {
         return true;
     }
 
-    public boolean generateTournamentRow(MatchGenerate matchGenerate) {
+    public List<MatchPublic> matchListToMatchPublicList(List<Match> accountList )
+    {
+        List<MatchPublic> matchPublicList = new ArrayList<MatchPublic>();
+
+        for( int i = 0 ; i < accountList.size() ; i++ ){
+            matchPublicList.add( new MatchPublic( accountList.get( i ) ) );
+        }
+
+        return matchPublicList;
+    }
+
+    public boolean generateTournamentFirstRound(MatchGenerate matchGenerate) {
 
         List<Team> teamList = matchGenerate.getTeamList();
-        int round = matchGenerate.getRound();
         Tournament tournament = matchGenerate.getTournament();
 
         List<Match> matchList = new ArrayList<Match>();
@@ -89,13 +106,13 @@ public class MatchService {
         int size = teamList.size();
         if((size & -size) == size)//check if power of 2
         {
-            if( size >= 2 )
+            if( size > 1 )
             {
                 for( int i = 0; i < (size/2); i++ )
                 {
                     matchList.add(
                             Match.builder()
-                                    .round( round )
+                                    .round( 0 )
                                     .place( i )
                                     .team1( teamList.get(2*i) )
                                     .team2( teamList.get(2*i + 1) )
@@ -105,12 +122,10 @@ public class MatchService {
                                     .build()
                     );
                 }
-
+                this.updateMatchList( matchList );
                 return true;
             }
         }
-        //List<Team> teamList = this.getMatchListByTournament( tournament );
-
         return false;
     }
 

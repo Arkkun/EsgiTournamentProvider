@@ -1,6 +1,6 @@
 package com.esgi.tournament.model;
 
-import com.esgi.match.Team;
+import com.esgi.team.model.Team;
 import lombok.*;
 
 import javax.persistence.*;

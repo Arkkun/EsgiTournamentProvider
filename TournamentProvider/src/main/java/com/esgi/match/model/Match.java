@@ -1,6 +1,6 @@
 package com.esgi.match.model;
 
-import com.esgi.match.Team;
+import com.esgi.team.model.Team;
 import com.esgi.tournament.model.Tournament;
 import lombok.*;
 

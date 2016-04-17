@@ -1,3 +1,8 @@
+bug create tournament when invalid token
+tournament data place restante
+validate fields
+---------------------------------------
+
 token retenu en js
 header avec pseudo ou connexion/inscription si pas de token dispo
 categorie d'action en cour

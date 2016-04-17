@@ -4,6 +4,7 @@ import com.esgi.account.authentication.*;
 import com.esgi.account.model.Account;
 import com.esgi.team.exception.NotValidTeamStatusException;
 import com.esgi.team.exception.TeamFieldNotValidException;
+import com.esgi.team.exception.TeamNotFoundException;
 import com.esgi.team.model.*;
 import com.esgi.team.repository.MembershipRepository;
 import com.esgi.team.service.MembershipService;
@@ -34,6 +35,11 @@ public class TeamController {
     @Autowired
     public TeamController(TeamService teamService){this.teamService = teamService;}
 
+    @RequestMapping(method = GET)
+    public List<Team> getTournaments( ) {
+        List<Team> teamList = teamService.getTeams();
+        return teamList;
+    }
     @RequestMapping(method = POST)
     @ResponseStatus(CREATED)
     public Team createTeam(@RequestBody AuthenticatedRequestBody<TeamCreation> authentication){
@@ -109,6 +115,9 @@ public class TeamController {
     @RequestMapping(method = GET, value = "/{idTeam}")
     public TeamData getInfoTeam(@PathVariable("idTeam") int idTeam){
         Team team = teamService.getTeamById(idTeam);
+        if( team == null ){
+            throw new TeamNotFoundException();
+        }
         TeamData teamData = TeamData.builder().team(team).build();
         return teamData;
     }

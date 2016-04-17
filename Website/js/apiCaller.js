@@ -162,6 +162,14 @@ var ApiCaller = function()
 		this.myAjax( url, method, data, callback );
 	}
 
+	proto.getTournaments = function( callback )
+	{
+		var url = this.baseURL + "tournament/";
+		var method = "GET";
+		var data = null ;
+		this.myAjax( url, method, data, callback );
+	}
+
 	proto.getTournamentById = function( id, callback )
 	{
 		var url = this.baseURL + "tournament/" + id;
@@ -172,7 +180,7 @@ var ApiCaller = function()
 
 	proto.launchTournament = function( id, callback )
 	{
-		var url = this.baseURL + "team/" + id;
+		var url = this.baseURL + "tournament/" + "launch/" + id;
 		var method = "PUT";
 		var data = {
 			"token": _GLOBAL.session.token
@@ -191,6 +199,14 @@ var ApiCaller = function()
 	}
 
 	/*===== Match =====*/
+
+	proto.getMatchs = function( callback )
+	{
+		var url = this.baseURL + "match/";
+		var method = "GET";
+		var data = null ;
+		this.myAjax( url, method, data, callback );
+	}
 
 	proto.getMatchById = function( id, callback )
 	{

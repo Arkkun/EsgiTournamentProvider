@@ -1,16 +1,16 @@
-package com.esgi.account.model;
+package com.esgi.tournament.model;
 
 import lombok.*;
 
 /**
  * Created by Andreï on 17/04/2016.
  */
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountData {
-
-    private AccountPublic accountPublic;
+public class TournamentData {
+    private Tournament tournament;
 }

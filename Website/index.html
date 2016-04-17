@@ -35,6 +35,7 @@
 				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageAccount')">Gestion Compte</li>
 				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageTeam')">Gestion Teams</li>
 				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageMatch')">Gestion Matchs</li>
+				<li class="text" onclick="_GLOBAL.navigation.goTo('ManageTournament')">Gestion Tournois</li>
 			</ul>
 		</div>
 		<!-- ===== CONTENT ===== -->
@@ -72,28 +73,66 @@
 					<input type="text" placeholder="score" class="text temp-val" id="giveMatchResult-score"/>
 					<input type="button" value="Publier" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].giveMatchResult();"/>
 				</div>
+				<div class="form getMatchs">
+					<input type="button" value="Lister matchs" class="text" onclick="_GLOBAL.navigation.controller['ManageMatch'].getMatchs();"/>
+				</div>
+			</div>
+			<!-- ===== MANAGE TOURNAMENT ===== -->
+			<div id="ManageTournament" class="content">
+				<div class="form joinTournament">
+					<p class="text">id Tournament : </p>
+					<input type="text" placeholder="id tournament" class="text temp-val" id="joinTournament-idTournament"/>
+					<p class="text">id Team : </p>
+					<input type="text" placeholder="id team" class="text temp-val" id="joinTournament-idTeam"/>
+					<input type="button" value="Rejoindre" class="text" onclick="_GLOBAL.navigation.controller['ManageTournament'].joinTournamentButton();"/>
+				</div>
+				<div class="form createTournament">
+					<p class="text">Nom : </p>
+					<input type="text" placeholder="nom" class="text temp-val" id="createTournament-name"/>
+					<p class="text">Description : </p>
+					<input type="text" placeholder="Description" class="text temp-val" id="createTournament-description"/>
+					<p class="text">Date : </p>
+					<input type="text" placeholder="Date" class="text temp-val" id="createTournament-date"/>
+					<p class="text">Nbr équipes : </p>
+					<input type="text" placeholder="Nbr équipes" class="text temp-val" id="createTournament-tournamentSize"/>
+					<p class="text">taille équipes : </p>
+					<input type="text" placeholder="taille équipes" class="text temp-val" id="createTournament-teamSize"/>
+					<input type="button" value="Créer" class="text" onclick="_GLOBAL.navigation.controller['ManageTournament'].createTournamentButton();"/>
+				</div>
+				<div class="form getTournaments">
+					<input type="button" value="Lister tournois" class="text" onclick="_GLOBAL.navigation.controller['ManageTournament'].getTournaments();"/>
+				</div>
 			</div>
 			<!-- ===== INFO ACCOUNT ===== -->
 			<div id="InfoAccount" class="content">
-				<p class="text">id : <span class="text id temp-html"></span></p>
-				<p class="text">login : <span class="text name temp-html"></span></p>
-				<p class="text">isAdmin : <span class="text admin temp-html"></span></p>
+				<p class="text">id : <span class="text id title temp-html"></span></p>
+				<p class="text">login : <span class="text name title temp-html"></span></p>
+				<p class="text">isAdmin : <span class="text admin title temp-html"></span></p>
 			</div>
 			<!-- ===== INFO TEAM ===== -->
 			<div id="InfoTeam" class="content">
-				<p class="text">id : <span class="text id temp-html"></span></p>
-				<p class="text">name : <span class="text name temp-html"></span></p>
-				<p class="text">tag : <span class="text tag temp-html"></span></p>
+				<p class="text">id : <span class="text id title temp-html"></span></p>
+				<p class="text">name : <span class="text name title temp-html"></span></p>
+				<p class="text">tag : <span class="text tag title temp-html"></span></p>
 			</div>
 			<!-- ===== INFO MATCH ===== -->
 			<div id="InfoMatch" class="content">
-				<p class="text">id : <span class="text id temp-html"></span></p>
-				<p class="text">round : <span class="text round temp-html"></span></p>
-				<p class="text">place : <span class="text place temp-html"></span></p>
-				<p class="text">team1 : <span class="text team1 temp-html"></span></p>
-				<p class="text">score1 : <span class="text score1 temp-html"></span></p>
-				<p class="text">team2 : <span class="text team2 temp-html"></span></p>
-				<p class="text">score2 : <span class="text score2 temp-html"></span></p>
+				<p class="text">id : <span class="text id title temp-html"></span></p>
+				<p class="text">round : <span class="text round title temp-html"></span></p>
+				<p class="text">place : <span class="text place title temp-html"></span></p>
+				<p class="text">team1 : <span class="text team1 title temp-html"></span></p>
+				<p class="text">score1 : <span class="text score1 title temp-html"></span></p>
+				<p class="text">team2 : <span class="text team2 title temp-html"></span></p>
+				<p class="text">score2 : <span class="text score2 title temp-html"></span></p>
+			</div>
+			<!-- ===== INFO Tournoi ===== -->
+			<div id="InfoTournament" class="content">
+				<p class="text">id : <span class="text id title temp-html"></span></p>
+				<p class="text">name : <span class="text name title temp-html"></span></p>
+				<p class="text">description : <span class="text description title temp-html"></span></p>
+				<p class="text">date : <span class="text date title temp-html"></span></p>
+				<p class="text">tournamentSize : <span class="text tournamentSize title temp-html"></span></p>
+				<p class="text">teamSize : <span class="text teamSize title temp-html"></span></p>
 			</div>
 			<!-- ===== LIST ACCOUNT ===== -->
 			<div id="ListAccount" class="content">
@@ -129,6 +168,19 @@
 					</div>
 				</div>
 			</div>
+			<!-- ===== LIST TOURNAMENT ===== -->
+			<div id="ListTournament" class="content">
+				<div class="list">
+					<div class="row title">
+						<div class="text cell"> id </div>
+						<div class="text cell"> name </div>
+						<div class="text cell"> description </div>
+						<div class="text cell"> date </div>
+						<div class="text cell"> nbr equipes </div>
+						<div class="text cell"> taille equipe </div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- ===== LIGHTBOXS ===== -->
 		<div id="lightBox-cont-success" class="lightBox-cont">
@@ -149,19 +201,28 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/global.js"></script>
-		<script src="js/navigation.js"></script>
+
 		<script src="js/session.js"></script>
 		<script src="js/apiCaller.js"></script>
 		<script src="js/lightBoxs.js"></script>
+		<script src="js/navigation.js"></script>
+
 		<script src="js/manage/manageAccount.js"></script>
 		<script src="js/manage/manageTeam.js"></script>
 		<script src="js/manage/manageMatch.js"></script>
+		<script src="js/manage/manageTournament.js"></script>
+
 		<script src="js/info/infoAccount.js"></script>
 		<script src="js/info/infoTeam.js"></script>
 		<script src="js/info/infoMatch.js"></script>
+		<script src="js/info/infoTournament.js"></script>
+
 		<script src="js/list/listAccount.js"></script>
 		<script src="js/list/listTeam.js"></script>
 		<script src="js/list/listMatch.js"></script>
+		<script src="js/list/listTournament.js"></script>
+
+
 		<script src="js/init.js"></script>
 
 	</body>

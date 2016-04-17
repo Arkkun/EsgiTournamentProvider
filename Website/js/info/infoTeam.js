@@ -16,9 +16,10 @@ var InfoTeam = function()
 	proto.init = function( data )
 	{
 		var infoElem = $( "#InfoTeam" );
-		infoElem.find( ".name" ).html( data.name );
-		infoElem.find( ".id" ).html( data.id );
-		infoElem.find( ".tag" ).html( ""+data.tag );
+		dataTeam = data.team;
+		infoElem.find( ".name" ).html( dataTeam.name );
+		infoElem.find( ".id" ).html( dataTeam.id );
+		infoElem.find( ".tag" ).html( ""+dataTeam.tag );
 	}
 
 	return _construct;
