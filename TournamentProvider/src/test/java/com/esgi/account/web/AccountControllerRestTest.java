@@ -22,7 +22,7 @@ public class AccountControllerRestTest extends AbstractRestTest {
     @Test
     public void should_get_list_of_3_accounts() {
         when()
-                .get("/accounts")
+                .get("/account")
                 .then()
                 .log().all()
                 .statusCode(OK.value())
@@ -39,7 +39,7 @@ public class AccountControllerRestTest extends AbstractRestTest {
         given()
                 .contentType(JSON)
                 .when()
-                .get("/accounts/" + id)
+                .get("/account/" + id)
                 .then()
                 .log().all()
                 .statusCode(BAD_REQUEST.value())
@@ -65,7 +65,6 @@ public class AccountControllerRestTest extends AbstractRestTest {
                 .body("login", is(login))
                 .body("admin", is(admin))
         ;*/
-
     }
 
     @Test
@@ -78,7 +77,7 @@ public class AccountControllerRestTest extends AbstractRestTest {
                 .contentType(JSON)
                 .body(toJson(account))
                 .when()
-                .post("/accounts")
+                .post("/account")
                 .then()
                 .log().all()
                 .statusCode(CREATED.value())
@@ -97,7 +96,7 @@ public class AccountControllerRestTest extends AbstractRestTest {
                 .contentType(JSON)
                 .body(toJson(account))
                 .when()
-                .post("/accounts")
+                .post("/account")
                 .then()
                 .log().all()
                 .statusCode(BAD_REQUEST.value())
@@ -116,7 +115,7 @@ public class AccountControllerRestTest extends AbstractRestTest {
                 .contentType(JSON)
                 .body(toJson(connectionRequestBody))
                 .when()
-                .post("/accounts/authenticate")
+                .post("/account/authenticate")
                 .then()
                 .log().all()
                 .statusCode(FORBIDDEN.value())

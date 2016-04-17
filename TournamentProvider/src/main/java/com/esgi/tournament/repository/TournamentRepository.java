@@ -1,6 +1,7 @@
-package com.esgi.account.repository;
+package com.esgi.tournament.repository;
 
 import com.esgi.account.model.Account;
+import com.esgi.tournament.model.Tournament;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,9 +14,9 @@ import java.util.List;
  */
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, String>{
+public interface TournamentRepository extends JpaRepository<Tournament, String>{
 
-    List<Account> findAll();
-    List<Account> findByLogin( String login );
-    List<Account> findById( int id );
+    List<Tournament> findAll();
+    List<Tournament> findById( int id );
+    List<Tournament> findByName( String name );
 }

@@ -7,6 +7,7 @@ import com.esgi.account.authentication.Token;
 import com.esgi.account.exceptions.AccountFieldNotValidException;
 import com.esgi.account.exceptions.AccountNotFoundException;
 import com.esgi.account.model.Account;
+import com.esgi.account.model.AccountData;
 import com.esgi.account.model.AccountPublic;
 import com.esgi.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
     private final AccountService accountService;
@@ -44,7 +45,7 @@ public class AccountController {
     }
 
     @RequestMapping(value="/{id}", method = GET)
-    public AccountPublic getAccountById(@PathVariable(value="id") int id )
+    public AccountData getAccountById(@PathVariable(value="id") int id )
     {
         Account account = accountService.getAccountById( id );
         if( account == null )
@@ -53,8 +54,20 @@ public class AccountController {
         }
 
         AccountPublic accountP = new AccountPublic( account );
+        AccountData accountD = new AccountData( accountP );
 
-        return accountP;
+        return accountD;
+    }
+
+    @RequestMapping(value="/my-account", method = POST)
+    public AccountData getMyAccount(@RequestBody Token token)
+    {
+        Account account = authenticationManager.getAccountFromToken( token.getToken() );
+
+        AccountPublic accountP = new AccountPublic( account );
+        AccountData accountD = new AccountData( accountP );
+
+        return accountD;
     }
 
     @RequestMapping(method = POST)
