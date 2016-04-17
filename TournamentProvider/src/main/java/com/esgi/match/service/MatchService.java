@@ -1,6 +1,7 @@
 package com.esgi.match.service;
 
 import com.esgi.account.repository.AccountRepository;
+import com.esgi.match.exceptions.MatchFieldNotValidException;
 import com.esgi.match.model.MatchPublic;
 import com.esgi.team.model.Team;
 import com.esgi.match.model.Match;
@@ -85,6 +86,37 @@ public class MatchService {
         return true;
     }
 
+    public void setMatchScore( Match match, Team team, Integer score ) {
+
+        if( match.getTeam1() == team )
+        {
+            if( match.getScore1() == null ){
+                match.setScore1( score );
+                matchRepository.save(match);
+                return;
+            }
+            else
+            {
+                throw new MatchFieldNotValidException("Score is already set");
+            }
+        }
+
+        if( match.getTeam2() == team )
+        {
+            if( match.getScore2() == null ){
+                match.setScore2( score );
+                matchRepository.save(match);
+                return;
+            }
+            else
+            {
+                throw new MatchFieldNotValidException("Score is already set");
+            }
+        }
+
+        throw new MatchFieldNotValidException("Your team is not in this match");
+    }
+
     public List<MatchPublic> matchListToMatchPublicList(List<Match> accountList )
     {
         List<MatchPublic> matchPublicList = new ArrayList<MatchPublic>();
@@ -142,13 +174,15 @@ public class MatchService {
             matchBrotherPlace = matchPlace -1;
 
         Match matchBrother = this.getMatchByTournamentAndRoundAndPlace( match.getTournament(), match.getRound(), matchBrotherPlace );
+        if( matchBrother == null )
+            return null;
 
         if( matchBrother.getScore1() == null || matchBrother.getScore2() == null )
             return null;
         Team winnerMatchBrother = matchBrother.getScore1() > matchBrother.getScore2() ? matchBrother.getTeam1() : matchBrother.getTeam2();
 
         Match nextMatch = Match.builder()
-                .round( match.getRound() )
+                .round( match.getRound() + 1 )
                 .place( matchPlace / 2 )
                 .team1( winnerMatch )
                 .team2( winnerMatchBrother )
@@ -156,7 +190,7 @@ public class MatchService {
                 .score2( null )
                 .tournament( match.getTournament() )
                 .build();
-
+        this.updateMatch( nextMatch );
 
         return nextMatch;
     }
