@@ -3,8 +3,13 @@ package com.esgi.account.authentication;
 import com.esgi.account.exceptions.AuthenticationNotValidException;
 import com.esgi.account.exceptions.MustBeAuthenticatedAsAdminException;
 import com.esgi.account.exceptions.MustBeAuthenticatedException;
+import com.esgi.account.exceptions.MustBeMembershipAsOwnerException;
 import com.esgi.account.model.Account;
 import com.esgi.account.service.AccountService;
+import com.esgi.team.model.Membership;
+import com.esgi.team.model.Team;
+import com.esgi.team.service.MembershipService;
+import com.esgi.team.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +20,10 @@ import org.springframework.stereotype.Component;
 public class AuthenticationManager {
     @Autowired
     AccountService accountService;
+    @Autowired
+    TeamService teamService;
+    @Autowired
+    MembershipService membershipService;
     @Autowired
     TokenProvider tokenProvider;
 
@@ -58,6 +67,21 @@ public class AuthenticationManager {
         if( account == null  )
         {
             throw new MustBeAuthenticatedException();
+        }
+    }
+
+    public void mustBeValidOwnerTeamToken(String token, int idTeam)
+    {
+        this.mustBeValidToken(token);
+
+        Account account = this.getAccountFromToken(token);
+        Team team = teamService.getTeamById(idTeam);
+
+        Membership membership = membershipService.getMembershipByTeamAndAccount(account,team);
+
+        if( membership == null || membership.isOwner() == false  )
+        {
+            throw new MustBeMembershipAsOwnerException();
         }
     }
 
