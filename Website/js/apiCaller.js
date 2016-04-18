@@ -124,11 +124,9 @@ var ApiCaller = function()
 
 	proto.getMembershipsByTeam = function( id, callback )
 	{
-		var url = this.baseURL + "team/" + "membership/list" + id;
-		var method = "PUT";
-		var data = {
-			"token": _GLOBAL.session.token
-		};
+		var url = this.baseURL + "team/" + "membership/" + id;
+		var method = "GET";
+		var data = null;
 		this.myAjax( url, method, data, callback );
 	}
 
@@ -262,7 +260,7 @@ var ApiCaller = function()
 			}
 			,error: function( data )
 			{
-				_GLOBAL.lightBoxs.openLightBox( "error" );
+				_GLOBAL.lightBoxs.openLightBox( "error", {exception:data.exception,message:data.message} );
 				console.log("error", data);
 			}
 		});

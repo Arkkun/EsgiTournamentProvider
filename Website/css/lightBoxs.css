@@ -13,14 +13,15 @@
 
 .lightBox
 {
-	display:inline-block;
-	height:100px;
-	width:300px;
-	vertical-align: middle;
-	text-align: center;
+	display: inline-block;
+    height: 100px;
+    min-width: 300px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px;
 }
 
-.lightBox p
+.lightBox .textCont
 {
 	display: inline-block;
 	vertical-align: middle;

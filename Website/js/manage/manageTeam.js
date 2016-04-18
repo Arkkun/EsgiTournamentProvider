@@ -75,5 +75,41 @@ var ManageTeam = function()
 		_GLOBAL.apiCaller.joinTeam( id, callback );
 	}
 
+	proto.getMembershipsByTeam = function( id )
+	{
+		var callback = function( data )
+		{
+			_GLOBAL.lightBoxs.openLightBox( "success");
+		}
+
+		_GLOBAL.apiCaller.getMembershipsByTeam( id, callback );
+	}
+
+	proto.getMembershipsByTeamButton = function()
+	{
+		var id = $( '#getMembershipsByTeam-id' ).val();
+		this.getMembershipsByTeam( id );
+	}
+
+	proto.getMembershipsByTeam = function( id )
+	{
+		var callback = function( data )
+		{
+			_GLOBAL.navigation.goTo( "ListMembership", data );
+		};
+
+		_GLOBAL.apiCaller.getMembershipsByTeam( id, callback );
+	}
+
+	proto.replyMembership = function( id, status )
+	{
+		var callback = function( data )
+		{
+			_GLOBAL.lightBoxs.openLightBox( "success");
+		}
+
+		_GLOBAL.apiCaller.replyMembership( id, status, callback );
+	}
+
 	return _construct;
 }();

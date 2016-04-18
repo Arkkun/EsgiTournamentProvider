@@ -23,6 +23,7 @@ var InfoTournament = function()
 		infoElem.find( ".date" ).html( dataTournament.date );
 		infoElem.find( ".tournamentSize" ).html( ""+dataTournament.tournamentSize );
 		infoElem.find( ".teamSize" ).html( ""+dataTournament.teamSize );
+		infoElem.find( ".slotLeft" ).html( ""+data.slotLeft );
 	}
 
 	return _construct;

@@ -60,6 +60,11 @@
 					<input type="text" placeholder="tag" class="text temp-val" id="createTeam-tag"/>
 					<input type="button" value="Créer" class="text" onclick="_GLOBAL.navigation.controller['ManageTeam'].createTeamButton();"/>
 				</div>
+				<div class="form listMemberships">
+					<p class="text">Id Team : </p>
+					<input type="text" placeholder="id" class="text temp-val" id="getMembershipsByTeam-id"/>
+					<input type="button" value="lister adhesions" class="text" onclick="_GLOBAL.navigation.controller['ManageTeam'].getMembershipsByTeamButton();"/>
+				</div>
 				<div class="form getTeams">
 					<input type="button" value="Lister teams" class="text" onclick="_GLOBAL.navigation.controller['ManageTeam'].getTeams();"/>
 				</div>
@@ -135,6 +140,7 @@
 				<p class="text">date : <span class="text date title temp-html"></span></p>
 				<p class="text">tournamentSize : <span class="text tournamentSize title temp-html"></span></p>
 				<p class="text">teamSize : <span class="text teamSize title temp-html"></span></p>
+				<p class="text">Places Libres : <span class="text slotLeft title temp-html"></span></p>
 			</div>
 			<!-- ===== LIST ACCOUNT ===== -->
 			<div id="ListAccount" class="content">
@@ -183,20 +189,35 @@
 					</div>
 				</div>
 			</div>
+			<!-- ===== LIST MEMBERSHIP ===== -->
+			<div id="ListMembership" class="content">
+				<div class="list">
+					<div class="row title">
+						<div class="text cell"> id </div>
+						<div class="text cell"> team </div>
+						<div class="text cell"> account </div>
+						<div class="text cell"> status </div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- ===== LIGHTBOXS ===== -->
 		<div id="lightBox-cont-success" class="lightBox-cont">
 			<div class="verticalAligner"></div>
 			<div class="lightBox">
 				<div class="verticalAligner"></div>
-				<p class="text">opération réussie</p>
+				<p class="textCont text">opération réussie</p>
 			</div>
 		</div>
 		<div id="lightBox-cont-error" class="lightBox-cont">
 			<div class="verticalAligner"></div>
 			<div class="lightBox">
 				<div class="verticalAligner"></div>
-				<p class="text">opération échouée</p>
+				<div class="textCont">
+					<p class="text">opération échouée</p> 
+					<p class="text" id="error-exception"></p>
+					<p class="text" id="error-message"></p>
+				</div>
 			</div>
 		</div>
 		<!-- ===== IMPORT JS ===== -->
@@ -223,6 +244,7 @@
 		<script src="js/list/listTeam.js"></script>
 		<script src="js/list/listMatch.js"></script>
 		<script src="js/list/listTournament.js"></script>
+		<script src="js/list/listMembership.js"></script>
 
 
 		<script src="js/init.js"></script>

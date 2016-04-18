@@ -1,0 +1,49 @@
+connect root
+create tournament
+
+create/connect j1a
+create team t1
+create/connect j1b
+join team t1
+connect j1a
+accept j1b
+join tournament
+
+create/connect j2a
+create team t2
+create/connect j2b
+join team t2
+connect j2a
+accept j2b
+join tournament
+
+create/connect j3a
+create team t3
+create/connect j3b
+join team t3
+connect j3a
+accept j3b
+join tournament
+
+create/connect j4a
+create team t4
+create/connect j4b
+join team t4
+connect j4a
+accept j4b
+join tournament
+
+connect root
+launch tournament
+
+connect j1a
+score
+
+connect j2a
+score
+
+connect j3a
+score
+
+connect j4a
+score

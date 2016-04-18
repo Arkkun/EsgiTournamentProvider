@@ -15,6 +15,7 @@ var Navigation = function()
 		this.controller["ListTeam"] = new ListTeam();
 		this.controller["ListMatch"] = new ListMatch();
 		this.controller["ListTournament"] = new ListTournament();
+		this.controller["ListMembership"] = new ListMembership();
 
 		this.allControllerElem = $( ".content" );
 		this.pageTitle = $( "#pageTitle p" );

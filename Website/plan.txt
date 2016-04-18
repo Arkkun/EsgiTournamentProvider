@@ -1,12 +1,3 @@
-dont count refused membership
-error avec exception et message
-rejoindre tournament from list
----------------------------------------
-tournament data place restante
-validate fields
-searchs
----------------------------------------
-
 token retenu en js
 header avec pseudo ou connexion/inscription si pas de token dispo
 categorie d'action en cour
