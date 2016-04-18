@@ -1,10 +1,16 @@
 package com.esgi.tournament.web;
 
 import com.esgi.AbstractRestTest;
+import com.esgi.account.authentication.AuthenticatedRequestBody;
+import com.esgi.account.authentication.TokenProvider;
+import com.esgi.account.repository.AccountRepository;
+import com.esgi.team.model.TeamCreation;
 import com.esgi.tournament.model.Tournament;
+import com.esgi.tournament.model.TournamentCreation;
 import com.esgi.tournament.repository.SqlDataTournament;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
@@ -19,7 +25,10 @@ import static org.springframework.http.HttpStatus.OK;
 
 @SqlDataTournament
 public class TournamentControllerRestTest extends AbstractRestTest {
-
+    @Autowired
+    TokenProvider tokenProvider;
+    @Autowired
+    AccountRepository accountRepository;
     @Test
     public void should_get_a_tournament() {
         when()
@@ -27,7 +36,7 @@ public class TournamentControllerRestTest extends AbstractRestTest {
                 .then()
                 .log().all()
                 .statusCode(OK.value())
-                .body("$", hasSize(1));
+                .body("$", hasSize(3));
     }
 
     @Test
@@ -38,16 +47,22 @@ public class TournamentControllerRestTest extends AbstractRestTest {
         final int tournamentSize = 16;
         final int teamSize = 5;
 
-        final Tournament tournament = Tournament.builder()
+        final TournamentCreation tournamentCreation = TournamentCreation.builder()
                 .name(name)
                 .description(description)
                 .date(date)
                 .tournamentSize(tournamentSize)
-                .teamSize(teamSize);
+                .teamSize(teamSize)
+                .build();
+
+        final String token = tokenProvider.getToken( accountRepository.findByLogin ("root" ).get(0) );
+        final AuthenticatedRequestBody<TournamentCreation> authTournamentCreation = new AuthenticatedRequestBody<TournamentCreation>();
+        authTournamentCreation.setBody( tournamentCreation );
+        authTournamentCreation.setToken( token );
 
         given()
                 .contentType(ContentType.JSON)
-                .body(toJson(tournament))
+                .body(toJson(authTournamentCreation))
                 .when()
                 .post("/tournament")
                 .then()

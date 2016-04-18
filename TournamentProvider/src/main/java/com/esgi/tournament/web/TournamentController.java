@@ -72,7 +72,9 @@ public class TournamentController {
         {
             throw new TournamentNotFoundException();
         }
-        TournamentData tournamentData = new TournamentData( tournament );
+
+        int slot = tournament.getTournamentSize() - joinTournamentService.getJoinTournamentsByTournament( tournament ).size();
+        TournamentData tournamentData = new TournamentData( tournament, slot );
 
         return tournamentData;
     }

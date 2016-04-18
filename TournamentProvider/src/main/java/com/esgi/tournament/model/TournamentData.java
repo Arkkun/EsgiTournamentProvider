@@ -13,4 +13,5 @@ import lombok.*;
 @NoArgsConstructor
 public class TournamentData {
     private Tournament tournament;
+    private int slotLeft;
 }

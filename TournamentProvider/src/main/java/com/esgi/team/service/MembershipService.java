@@ -22,7 +22,11 @@ public class MembershipService {
     //@Autowired
     //public MembershipService(MembershipRepository membershipRepository){this.membershipRepository = membershipRepository;}
 
-    public List<Membership> getMemberships(){return  membershipRepository.findAll();}
+    public List<Membership> getMemberships(){
+        List<Membership> membershipList = membershipRepository.findAll();
+
+        return membershipList;
+    }
 
     public List<Membership> getMembershipsByTeam(Team team){
         return membershipRepository.findByTeam(team);

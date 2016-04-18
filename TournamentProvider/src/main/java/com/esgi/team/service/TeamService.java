@@ -19,7 +19,16 @@ public class TeamService {
     @Autowired
     public TeamService(TeamRepository teamRepository){this.teamRepository = teamRepository;}
 
-    public List<Team> getTeams(){return teamRepository.findAll();}
+    public List<Team> getTeams(){
+        List<Team> teamList = teamRepository.findAll();
+
+        for( int i = 0 ; i < teamList.size() ; i++ )
+        {
+            if( teamList.get(i).isDeleted() )
+                teamList.remove(i);
+        }
+        return teamList;
+    }
 
     public boolean updateTeam(Team team){
         teamRepository.save(team);

@@ -70,7 +70,14 @@ public class JoinTournamentService {
             throw new TournamentCantJoinException("Tournament is full");
         }
 
-        int numberTeamMembership = membershipService.getMembershipsByTeam( team ).size();
+        List<Membership> membershipList = membershipService.getMembershipsByTeam( team );
+        for( int i = 0 ; i < membershipList.size() ; i++ )
+        {
+            if( membershipList.get(i).getStatus().equals( "refused" ) || membershipList.get(i).getStatus().equals( "applied" ) )
+                membershipList.remove(i);
+        }
+
+        int numberTeamMembership = membershipList.size();
         if( numberTeamMembership < tournament.getTeamSize() )
         {
             throw new TournamentCantJoinException("Team has not enough players");
